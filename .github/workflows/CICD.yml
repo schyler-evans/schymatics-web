@@ -68,8 +68,8 @@ jobs:
           path: build
 
       - name: Commit and push changes
+        if: "![[ -z $(git status -uno --porcelain) ]]"
         run: |
-          [[ -z $(git status -uno --porcelain) ]] && echo "this branch is clean, no need to push..." && kill -SIGINT $$;
           git add .
           git commit -m "Deploy build"
           git push
