@@ -68,7 +68,7 @@ jobs:
         run: |
           ls
           rm -rf ./*
-          cp -r build-artifact/* .
+          cp -r 'build-artifact/'* .
 
       - name: Commit and push changes
         run: |
