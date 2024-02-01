@@ -49,6 +49,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: build-artifact
+          path: build
 
       - name: Configure Git credentials
         run: |
