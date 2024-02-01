@@ -69,11 +69,6 @@ jobs:
 
       - name: Commit and push changes
         run: |
-            if [[ -z $(git status -uno --porcelain) ]]; then
-              echo "Changes found, adding and committing..."
               git add .
-              git commit -m "Deploy build"
+              git commit -m "Deploy build" --allow-empty
               git push
-            else
-              echo "No changes found."
-            fi
