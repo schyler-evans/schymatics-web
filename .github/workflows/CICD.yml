@@ -65,6 +65,9 @@ jobs:
           repository: schyler-evans/schymatics-web-build
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
+      - name: Display structure
+        run: ls -R .
+
       # - name: Copy build files
       #   run: |
       #     ls
