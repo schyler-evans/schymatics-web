@@ -51,7 +51,7 @@ jobs:
           name: build-artifact
           path: .
       - name: Display structure of downloaded files
-        run: ls -R your/destination/dir
+        run: ls -R .
 
       - name: Configure Git credentials
         run: |
