@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    needs: []  # This job has no dependencies
+    needs: []
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 21
@@ -23,7 +23,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [ test ]  # This job depends on the "test" job being successful
+    needs: [ test ]
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 21
@@ -34,3 +34,33 @@ jobs:
         run: npm ci
       - name: Build artifacts
         run: npm run build
+        
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+
+      - name: Configure Git credentials
+        run: |
+          git config --global user.email "schyler.evans@gmail.com"
+          git config --global user.name "Schyler Evans"
+
+      - name: Checkout build repository
+        uses: actions/checkout@v3
+        with:
+          repository: schyler-evans/schymatics-web-build
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+      - name: Copy build files
+        run: |
+          rm -rf ./*
+          cp -r build-artifact/* .
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Deploy build"
+          git push
