@@ -68,8 +68,12 @@ jobs:
           path: build
 
       - name: Commit and push changes
-        # if: "![[ -z $(git status -uno --porcelain) ]]"
         run: |
-          git add .
-          git commit -m "Deploy build"
-          git push
+            if [[ -z $(git status -uno --porcelain) ]]; then
+              echo "Changes found, adding and committing..."
+              git add .
+              git commit -m "Deploy build"
+              git push
+            else
+              echo "No changes found."
+            fi
