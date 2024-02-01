@@ -27,6 +27,7 @@ jobs:
       run: npm ci
 
   test:
+    needs: init
     runs-on: ubuntu-latest
     steps:
 
@@ -34,6 +35,7 @@ jobs:
       run: npm test
 
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
     
