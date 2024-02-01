@@ -46,15 +46,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build ]
     steps:
-
-
-      # - name: Display structure of downloaded files
-      #   run: ls -R .
-
       - name: Configure Git credentials
         run: |
           git config --global user.email "schyler.evans@gmail.com"
           git config --global user.name "Schyler Evans"
+
+      - name: Clear 
+        run: |
+          rm -rf ./build/*
 
       - name: Checkout build repository
         uses: actions/checkout@v3
@@ -66,18 +65,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-
-      - name: Display structure 1
-        run: ls -R .
-
-      - name: Copy build files
-        run: |
-          ls
-          # rm -rf ./*
-          cp -r build-artifact/* .
-
-      - name: Display structure 2
-        run: ls -R .
+          path: build
 
       - name: Commit and push changes
         run: |
