@@ -65,11 +65,11 @@ jobs:
           repository: schyler-evans/schymatics-web-build
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
-      - name: Copy build files
-        run: |
-          ls
-          rm -rf ./*
-          cp -r 'build-artifact/'* .
+      # - name: Copy build files
+      #   run: |
+      #     ls
+      #     rm -rf ./*
+      #     cp -r 'build-artifact/'* .
 
       - name: Commit and push changes
         run: |
