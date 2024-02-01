@@ -49,6 +49,9 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: build-artifact
+          path: .
+      - name: Display structure of downloaded files
+        run: ls -R your/destination/dir
 
       - name: Configure Git credentials
         run: |
