@@ -53,7 +53,8 @@ jobs:
 
       - name: Clear 
         run: |
-          rm -rf ./dist/*
+          # rm -rf ./*
+          find . -type f -not -name '*.gz'-delete
 
       - name: Checkout build repository
         uses: actions/checkout@v3
@@ -65,7 +66,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-          path: dist
+          # path: dist
 
       - name: Commit and push changes
         run: |
