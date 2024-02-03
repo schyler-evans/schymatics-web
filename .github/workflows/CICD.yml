@@ -73,7 +73,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [ build ]
+    needs: [ update-build-branch ]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
