@@ -1,12 +1,12 @@
 import React from 'react';
-import chaos from './chaos.png'
+import icon from './icon.png'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={chaos} className="App-logo" alt="logo" />
+        <img src={icon} className="App-logo" alt="logo" />
         <p>
           Undergoing renovations.
         </p>
