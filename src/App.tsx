@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import chaos from './chaos.png'
 import './App.css';
 
