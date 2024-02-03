@@ -65,11 +65,14 @@ jobs:
         with:
           name: build-artifact
 
-      - name: Commit and push changes
+      - name: Update build branch
         run: |
-              git add .
-              git commit -m "Update build"
-              git push
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add .
+            git commit -m "Update build"
+            git push
+          fi
+        shell: bash
 
   deploy:
     runs-on: ubuntu-latest
