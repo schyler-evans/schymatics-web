@@ -41,8 +41,8 @@ jobs:
         with:
           name: build-artifact
           path: build
-        
-  deploy:
+
+  deploy-to-build-branch:
     runs-on: ubuntu-latest
     needs: [ build ]
     steps:
@@ -51,25 +51,54 @@ jobs:
           git config --global user.email "schyler.evans@gmail.com"
           git config --global user.name "Schyler Evans"
 
-      - name: Clear 
-        run: |
-          # rm -rf ./*
-          find . -type f -not -name '*.gz'-delete
-
-      - name: Checkout build repository
+      - name: Checkout build branch
         uses: actions/checkout@v3
         with:
-          repository: schyler-evans/schymatics-web-build
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: schyler-evans/schymatics-web
+          ref: build
+
+      - name: Clear 
+        run: rm -rf ./*
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-          # path: dist
 
       - name: Commit and push changes
         run: |
               git add .
-              git commit -m "Deploy build" --allow-empty
+              git commit -m "Update build"
               git push
+  
+  # deploy-to-build-repo:
+  #   runs-on: ubuntu-latest
+  #   needs: [ build ]
+  #   steps:
+  #     - name: Configure Git credentials
+  #       run: |
+  #         git config --global user.email "schyler.evans@gmail.com"
+  #         git config --global user.name "Schyler Evans"
+
+  #     - name: Clear 
+  #       run: |
+  #         # rm -rf ./*
+  #         find . -type f -not -name '*.gz'-delete
+
+  #     - name: Checkout build repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         repository: schyler-evans/schymatics-web-build
+  #         token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+  #     - name: Download build artifact
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: build-artifact
+  #         # path: dist
+
+  #     - name: Commit and push changes
+  #       run: |
+  #             git add .
+  #             git commit -m "Deploy build" --allow-empty
+  #             git push
