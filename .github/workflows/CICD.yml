@@ -14,8 +14,6 @@ on:
           - patch
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   test:
