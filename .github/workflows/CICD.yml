@@ -64,9 +64,6 @@ jobs:
     needs: [ test, build ]
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - name: Install dependencies
         run: npm ci
@@ -81,11 +78,13 @@ jobs:
           npm version ${{ github.inputs.version-increment }}
           git add package.json CHANGELOG.md
           git commit -m "Bump version to ${{ github.inputs.version-increment }} ${{ github.sha }}"
+          git push
+        shell: bash
           
-      - name: Push changes
-        uses: ad-action/push@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Push changes
+      #   uses: ad-action/push@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
   update-build-branch:
     runs-on: ubuntu-latest
