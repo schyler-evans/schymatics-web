@@ -73,16 +73,16 @@ jobs:
         with:
           milestone: ${{ github.sha }}
           
-      # - name: Bump version and commit
-      #   run: |
-      #     npm version ${{ github.inputs.version-increment }}
-      #     git add package.json CHANGELOG.md
-      #     git commit -m "Bump version to ${{ github.inputs.version-increment }} ${{ github.sha }}"
+      - name: Bump version and commit
+        run: |
+          npm version ${{ github.inputs.version-increment }}
+          git add package.json CHANGELOG.md
+          git commit -m "Bump version to ${{ github.inputs.version-increment }} ${{ github.sha }}"
           
-      # - name: Push changes
-      #   uses: ad-action/push@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        uses: ad-action/push@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   update-build-branch:
     runs-on: ubuntu-latest
