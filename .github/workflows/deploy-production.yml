@@ -1,0 +1,22 @@
+name: Production Deploy
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: build
+
+      - name: Deploy to server via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME }}
+          password: ${{ secrets.LIGHTSAIL_PASSWORD }}
+          port: ${{ secrets.LIGHTSAIL_PORT }}
+          source: "."
+          target: C:\inetpub\schymatics-web\ 
