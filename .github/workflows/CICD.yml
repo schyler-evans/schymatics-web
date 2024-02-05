@@ -75,6 +75,7 @@ jobs:
         run: |
           npm version ${{ github.inputs.version-increment }}
           git add package.json CHANGELOG.md
+          git tag "v${{ steps.npm.outputs.version }}"
           git commit -m "v${{ github.inputs.version-increment }} ${{ github.sha }} [skip actions]"
           git push
         shell: bash
