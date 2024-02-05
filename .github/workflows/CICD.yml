@@ -14,6 +14,8 @@ on:
           - patch
   push:
     branches: [ main ]
+    ref:
+      - "refs/heads/main.*\[version-bump\]"
 
 jobs:
   test:
