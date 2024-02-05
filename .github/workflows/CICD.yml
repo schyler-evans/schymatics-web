@@ -64,7 +64,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-          token: ${{ secrets.PUSH_TOKEN }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
         
       - name: Generate changelog
         uses: TriPSs/conventional-changelog-action@v3
