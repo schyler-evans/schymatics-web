@@ -14,8 +14,6 @@ on:
           - patch
   push:
     branches: [ main ]
-    ref:
-      - "refs/heads/main.*\[version-bump\]"
 
 jobs:
   test:
@@ -79,7 +77,7 @@ jobs:
         run: |
           npm version ${{ github.inputs.version-increment }}
           git add package.json CHANGELOG.md
-          git commit -m "Bump version to ${{ github.inputs.version-increment }} ${{ github.sha }}"
+          git commit -m "v${{ github.inputs.version-increment }} ${{ github.sha }} [skip actions]"
           git push
         shell: bash
 
